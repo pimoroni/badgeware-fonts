@@ -1,0 +1,4 @@
+freetype-py==2.5.1
+numpy==2.4.4
+pillow==12.2.0
+shapely==2.1.2

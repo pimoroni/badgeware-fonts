@@ -1,0 +1,47 @@
+name: Build Fonts
+
+on:
+  push:
+  pull_request:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build Fonts
+    runs-on: ubuntu-24.04
+    env:
+      CI_PROJECT_ROOT: ${{ github.workspace }}/src-${{ github.sha }}
+      CI_BUILD_ROOT: ${{ github.workspace }}/out
+      CI_USE_ENV: 1
+
+    steps:
+    - name: "Checkout Project"
+      uses: actions/checkout@v4
+      with:
+        submodules: true
+        path: ${{ env.CI_PROJECT_ROOT }}
+
+    - name: Install Python
+      uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
+      with:
+        python-version: '3.13'
+
+    - name: Install Python Deps
+      run: pip install -r requirements.txt
+
+    - name: Build Fonts
+      shell: bash
+      run: source ci/ci.sh && ci_build_all
+
+    - name: "Artifacts: Upload Fonts"
+      uses: actions/upload-artifact@v4
+      with:
+        name: badgeware-fonts
+        path: ${{ github.workspace }}/out
+
+    - name: "Release: Upload Fonts"
+      if: github.event_name == 'release'
+      uses: softprops/action-gh-release@v2
+      with:
+        files: ${{ github.workspace }}/out
