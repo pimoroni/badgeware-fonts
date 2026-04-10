@@ -28,11 +28,12 @@ jobs:
         python-version: '3.13'
 
     - name: Install Python Deps
-      run: pip install -r requirements.txt
+      shell: bash
+      run: pip install -r $CI_PROJECT_ROOT/requirements.txt
 
     - name: Build Fonts
       shell: bash
-      run: source ci/ci.sh && ci_build_all
+      run: source $CI_PROJECT_ROOT/ci/ci.sh && ci_build_all
 
     - name: "Artifacts: Upload Fonts"
       uses: actions/upload-artifact@v4
