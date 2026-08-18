@@ -1,0 +1,26 @@
+# Material Symbols for the pages of statsbadge, https://github.com/pimoroni/statsbadge,
+# each remapped onto a letter so badge-side code draws it from an ordinary string.
+#
+#   name  codepoint  printable
+
+# one per stat group, which tells gauges apart on a dials page
+memory              e322  c
+developer_board     e30d  g
+memory_alt          f7a3  m
+storage             e1db  d
+lan                 eb2f  n
+bolt                ea0b  p
+mode_fan            f168  f
+computer            e31e  y
+
+# one per field, for a page whose readings come from the same group
+speed               e9e4  l
+thermostat          f076  t
+graphic_eq          e1b8  s
+list_alt            e677  r
+upload              f09b  u
+download            f090  o
+battery_full        e1a5  b
+percent             eb58  e
+data_usage          eff2  a
+schedule            efd6  h

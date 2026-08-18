@@ -1,0 +1,244 @@
+# Every font this repository publishes. `badgeware-fonts list` shows what it expands into.
+
+[defaults]
+cap = 81
+
+# Body text is drawn small, so it does not need to hold up past 20px: 32 points a glyph
+# against 63, and 22KB against 39. Icons keep the default, being drawn larger.
+[defaults.text]
+quality = 20
+
+[charsets.clock]
+# What a clock face draws. The cap height is measured off the face, not off a glyph packed
+# into the font, so nothing here goes unused.
+chars = " 0123456789:"
+
+[charsets.kana]
+# Hiragana, katakana and the punctuation between them, which reads as Japanese without the
+# 2136 joyo kanji a badge has no flash for. The combining dakuten at U+3099 are left out:
+# a badge composes nothing, and the precomposed kana are here.
+ranges = ["U+3000-U+3020", "U+3030", "U+3041-U+3096", "U+309B-U+30FF"]
+
+[charsets.emoji]
+# The blocks Noto Emoji populates below U+FFFF. A codepoint packs as a u16, which puts the
+# emoji from U+1F300 up out of reach of an .af entirely.
+ranges = ["U+2190-U+27BF", "U+2900-U+2B55", "U+3030-U+3299"]
+
+
+# -- statsbadge, https://github.com/pimoroni/statsbadge ---------------------
+
+[[font]]
+name = "lexend"
+type = "text"
+source = "google:Lexend"
+weight = 400
+charset = "latin"
+
+[[font]]
+name = "lexend-digits"
+type = "text"
+source = "google:Lexend"
+weight = 400
+# A digital clock face draws numbers 84pt tall. A narrow grid flattens the counter of a
+# nought at that size, and a cap over 127 packs wide on its own.
+cap = 648
+# Drawn 84pt tall, so it has to hold up well past where body text stops.
+quality = 100
+charset = "clock"
+
+[[font]]
+name = "phosphor-symbols"
+type = "icons"
+# Phosphor, https://github.com/phosphor-icons/web, on the same letters badge-symbols uses.
+# The weights are a font file each instead of an axis, so a weight is a path.
+source = "github:phosphor-icons/web"
+ref = "v2.1.2"
+path = "src/regular/Phosphor.ttf"
+licence = "https://raw.githubusercontent.com/phosphor-icons/homepage/master/LICENSE"
+corpus = "corpus/phosphor-symbols.txt"
+codepoints = "remap"
+
+[[font]]
+name = "phosphor-symbols-fill"
+type = "icons"
+source = "github:phosphor-icons/web"
+ref = "v2.1.2"
+path = "src/fill/Phosphor-Fill.ttf"
+licence = "https://raw.githubusercontent.com/phosphor-icons/homepage/master/LICENSE"
+# The same codepoints as the regular weight, so one corpus covers both.
+corpus = "corpus/phosphor-symbols.txt"
+codepoints = "remap"
+
+[[font]]
+name = "dseg7-classic"
+type = "text"
+# The seven-segment face a digital clock draws its readout in. Released as a zip of every
+# DSEG variant, the licence packed beside them.
+source = "github:keshikan/DSEG"
+release = "v0.46"
+asset = "fonts-DSEG_v046.zip"
+member = "DSEG7-Classic/DSEG7Classic-Bold.ttf"
+licence = "DSEG-LICENSE.txt"
+# Seven segments and no letters, so the cap is measured off a digit.
+cap = 648
+quality = 100
+cap_from = "0"
+chars = " 0123456789:"
+
+[[font]]
+name = "badge-symbols"
+type = "icons"
+source = "material:outlined"
+corpus = "corpus/badge-symbols.txt"
+codepoints = "remap"
+web = true
+
+
+# -- Roboto with Material Symbols, in one file ------------------------------
+
+[[font]]
+name = "roboto-text"
+type = "text"
+source = "google:Roboto"
+weight = 500
+charset = "basic_latin"
+
+[[font]]
+name = "material-symbols"
+type = "icons"
+source = "material:sharp"
+corpus = "corpus/material-symbols.txt"
+# At their own codepoints, from U+E000 up, clear of the text half of the merge.
+codepoints = "preserve"
+axes = { FILL = 1 }
+
+[[font]]
+name = "roboto-symbols"
+type = "merge"
+parts = ["roboto-text", "material-symbols"]
+
+
+# -- Google Fonts ----------------------------------------------------------
+#
+# The weights, styles and widths each family declares in its METADATA.pb. A variable
+# family takes the weight and width as coordinates; a static one has a file per weight.
+
+[[font]]
+name = "lato"
+type = "text"
+source = "google:Lato"
+weights = [100, 300, 400, 700, 900]
+styles = ["normal", "italic"]
+charset = "latin"
+
+[[font]]
+name = "advent-pro"
+type = "text"
+source = "google:Advent Pro"
+weights = [100, 200, 300, 400, 500, 600, 700, 800, 900]
+styles = ["normal", "italic"]
+width = "normal"
+charset = "latin"
+
+[[font]]
+name = "advent-pro-ultra-expanded"
+type = "text"
+source = "google:Advent Pro"
+weights = [100, 200, 300, 400, 500, 600, 700, 800, 900]
+styles = ["normal", "italic"]
+width = "ultra-expanded"
+# At 81 the italic runs W, w, % and @ past the coordinate byte, which drops them.
+cap = 68
+charset = "latin"
+
+[[font]]
+name = "alumni-sans-pinstripe"
+type = "text"
+source = "google:Alumni Sans Pinstripe"
+styles = ["normal", "italic"]
+charset = "latin"
+
+[[font]]
+name = "cherry-bomb-one"
+type = "text"
+source = "google:Cherry Bomb One"
+charset = "latin"
+
+[[font]]
+name = "dynapuff"
+type = "text"
+source = "google:DynaPuff"
+weights = [400, 500, 600, 700]
+widths = ["condensed", "normal"]
+charset = "latin"
+
+[[font]]
+name = "indie-flower"
+type = "text"
+source = "google:Indie Flower"
+charset = "latin"
+
+[[font]]
+name = "noto-emoji"
+# Icons, not text: the face has no H to measure a cap from, and an emoji is fitted to a box
+# instead of sitting on a baseline.
+type = "icons"
+source = "google:Noto Emoji"
+weights = [300, 400, 500, 600, 700]
+charset = "emoji"
+
+[[font]]
+name = "noto-serif-jp"
+type = "text"
+source = "google:Noto Serif JP"
+weights = [200, 300, 400, 500, 600, 700, 800, 900]
+charset = ["basic_latin", "kana"]
+
+[[font]]
+name = "open-sans"
+type = "text"
+source = "google:Open Sans"
+weights = [300, 400, 500, 600, 700, 800]
+styles = ["normal", "italic"]
+widths = ["condensed", "normal"]
+charset = "latin"
+
+[[font]]
+name = "permanent-marker"
+type = "text"
+source = "google:Permanent Marker"
+# 81 drops the OE ligature.
+cap = 77
+charset = "latin"
+
+[[font]]
+name = "poppins"
+type = "text"
+source = "google:Poppins"
+weights = [100, 200, 300, 400, 500, 600, 700, 800, 900]
+styles = ["normal", "italic"]
+# 81 drops W from the heavy italics, and the OE ligature from the light ones.
+cap = 76
+charset = "latin"
+
+[[font]]
+name = "manrope"
+type = "text"
+source = "google:Manrope"
+weights = [200, 300, 400, 500, 600, 700, 800]
+charset = "latin"
+
+[[font]]
+name = "roboto"
+type = "text"
+source = "google:Roboto"
+weights = [100, 200, 300, 400, 500, 600, 700, 800, 900]
+styles = ["normal", "italic"]
+widths = ["condensed", "normal"]
+charset = "latin"
+
+[[font]]
+name = "tilt-neon"
+type = "text"
+source = "google:Tilt Neon"
+charset = "latin"

@@ -1,0 +1,45 @@
+target-version = "py311"
+
+# The blank-line rules are still preview, so they are named one by one rather than opting
+# every selected family into the rest of the preview set.
+lint.preview = true
+lint.explicit-preview-rules = true
+
+lint.select = [
+    "E301",  # one blank line between methods
+    "E302",  # two before a top-level def
+    "E303",  # no more than two in a row
+    "E305",  # two after a def, before other code
+    "F",    # pyflakes
+    "Q",    # quotes
+    "W",    # pycodestyle warnings
+    "E",    # pycodestyle errors
+    "B",    # bugbear: unused loop variables, sloppy code
+    "COM",  # commas
+    "BLE",  # blind except
+    "C4",   # comprehensions
+    "ISC",  # implicit string concat, less ISC001 below
+    "I",    # import sorting
+    "ICN",  # import conventions
+    "PIE",  # misc silliness, catches range with a 0 start argument
+    "RSE",  # raise
+    "RET",  # straightforward code around return statements
+    "SLF",  # private member access
+    "ARG",  # unused arguments
+    "UP"    # pyupgrade, mostly f-strings over "..." % value
+]
+
+lint.ignore = [
+    "E501",    # line too long
+    "E402",    # module level import not at top of file
+    "COM812",  # add trailing comma
+    # What black leaves behind when it joins a wrapped f-string onto one line.
+    "ISC001"
+]
+
+[lint.per-file-ignores]
+# FreeType raises whatever it likes at a malformed face, urllib at a bad transfer. Both
+# modules turn that into a named failure.
+"src/badgeware_fonts/sources.py" = ["BLE001"]
+"src/badgeware_fonts/glyphs.py" = ["BLE001"]
+"tests/*.py" = ["BLE001", "SLF001"]

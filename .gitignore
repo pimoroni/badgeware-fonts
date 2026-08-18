@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+build/
+dist/
+out/
+check/
+fonts/
+.ruff_cache/
+.pytest_cache/
+.coverage

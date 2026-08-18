@@ -1,0 +1,26 @@
+# Phosphor icons for the pages of statsbadge, https://github.com/pimoroni/statsbadge, on
+# the same letters as corpus/badge-symbols.txt. Either font drops into the other.
+#
+#   name  codepoint  printable
+
+# one per stat group, which tells gauges apart on a dials page
+cpu                 e610  c
+graphics-card       e612  g
+memory              e9c4  m
+hard-drive          e29e  d
+network             edde  n
+lightning           e2de  p
+fan                 e9f2  f
+desktop-tower       e562  y
+
+# one per field, for a page whose readings come from the same group
+speedometer         ee74  l
+thermometer-simple  e5cc  t
+equalizer           ebbc  s
+list-dashes         e2f4  r
+upload-simple       e4c0  u
+download-simple     e20c  o
+battery-full        e0c0  b
+percent             e3b6  e
+chart-donut         eaa6  a
+clock               e19a  h
